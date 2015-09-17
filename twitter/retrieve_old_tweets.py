@@ -1,3 +1,6 @@
+"""
+retrieve old tweets for a query
+"""
 import tweepy
 import json
 import argparse
