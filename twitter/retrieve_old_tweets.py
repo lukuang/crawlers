@@ -1,7 +1,7 @@
 import tweepy
 import json
-
-
+import argparse
+import re
 
 def set_value(input_value):
   if (input_value==None):
@@ -25,10 +25,17 @@ count = 0
 i_count = 0
 results = {}
 
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("query_string")
+args = parser.parse_args()
+query = " OR ".join(re.findall("\w+", args.query_string))
+print "got query"
+print query
+
 
 
 for page in tweepy.Cursor(api.search,
-                           q="Nepal OR earthquake",
+                           q=query.lower(),
                            count=100,
                            result_type="mixed",
                            include_entities=True,
