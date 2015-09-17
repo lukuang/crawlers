@@ -31,7 +31,7 @@ results = {}
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("query_string")
 args = parser.parse_args()
-query = " OR ".join(re.findall("\w+", args.query_string))
+query = " OR ".join(re.findall("\w+", args.query_string.lower()))
 print "got query"
 print query
 

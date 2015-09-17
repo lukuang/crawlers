@@ -1,4 +1,6 @@
-
+"""
+retrieve tweets from ongoing tweet stream
+"""
 from __future__ import absolute_import, print_function
 
 from tweepy.streaming import StreamListener
@@ -6,9 +8,10 @@ from tweepy import OAuthHandler
 from tweepy import Stream
 #import tweepy
 import json
+import argparse
 import time
 from time import gmtime, strftime 
-import os
+import os,re
 
 previous = strftime("%Y-%m-%d-%H", gmtime())
 all_data = []
@@ -56,6 +59,11 @@ if __name__ == '__main__':
     auth.secure = True
     auth.set_access_token(access_token, access_token_secret)
 
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("query_string")
+    args = parser.parse_args()
+    query = re.findall("\w+", args.query_string.lower())
+    print (query)
     #api = tweepy.API(auth)
 
     # If the authentication was successful, you should
@@ -67,5 +75,5 @@ if __name__ == '__main__':
     # timeline. The "Read and Write" setting is on https://dev.twitter.com/apps
     #api.update_status(status='Updating using OAuth authentication via Tweepy!')
     stream = Stream(auth, l)
-    stream.filter(track=["football"],languages = ["en"]) 
+    stream.filter(track=query,languages = ["en"]) 
     #stream.filter(track=["Nepal","earthquake"], languages = ["English"])
