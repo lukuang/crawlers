@@ -126,7 +126,7 @@ def parse_search_results(search_url, content, date_dir):
       fn = codecs.open(map_file_path, 'ab', 'utf-8')
       fn.write('%s %d\n' %('all', results_cnt))
 
-    except:
+  except:
       # Catch any unicode errors while printing to console
       # and just ignore them to avoid breaking application.
       print "Exception in parse_search_results()"
@@ -136,6 +136,7 @@ def parse_search_results(search_url, content, date_dir):
       pass
 
 def check_request_count():
+  global REQUEST_COUNT
   REQUEST_COUNT +=1
   if (REQUEST_COUNT >= LIMIT):
     print "reached daily limit, do it next day"
@@ -144,6 +145,7 @@ def check_request_count():
 def crawl(start, end):
   date = start
   crawl_dir = DEST_DIR
+  global REQUEST_COUNT
   if not os.path.exists(crawl_dir):
     os.mkdir(crawl_dir)
 
@@ -174,7 +176,7 @@ def crawl(start, end):
     # construct the search URL
     # basically this URL will return in JSON format
     url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?'\
-        'begin_date=%s&end_date=%s' % (date_str, date_str)
+        'begin_date=%s&end_date=%s&api-key=%s' % (date_str, date_str,MY_KEY)
     print 'Retrieve search results: %s' % url
     content = get_page(url)
     check_request_count()
@@ -185,6 +187,6 @@ def crawl(start, end):
     date += timedelta(days = 1)
 
 if __name__ == '__main__':
-  start = date(2013,01,01)
-  end = date(2013,06,01)
+  start = date(2013,6,5)
+  end = date(2015,9,16)
   crawl(start, end)
