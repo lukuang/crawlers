@@ -116,10 +116,10 @@ def parse_search_results(search_url, content, date_dir):
             fn.write('%s %s\n' %(str(index), news[j]))
 
       new_results_cnt = int(results_json['response']['meta']['hits'])
-      new_results_end = int(results_json['response']['meta']['offset'])
+      new_results_offset = int(results_json['response']['meta']['offset'])
 
       # if we reached the end, stop
-      if new_results_cnt == new_results_end:
+      if new_results_cnt <= new_results_offset+10:
         break
   try:
       map_file_path = date_dir + 'map'
