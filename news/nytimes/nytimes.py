@@ -37,7 +37,16 @@ def get_page(url):
 
 def parse_search_results(search_url, content, date_dir):
   # parse the JSON result
-  results_json = json.loads(content)
+  try:
+    results_json = json.loads(content)
+  except:
+    print "return is wrong!"
+    print "the url is", search_url
+    print "-"*20
+    print content
+    print "-"*20
+    sys.exit(-1)
+    
 
   # first, save how many news documents for this date
   results_cnt = int(results_json['response']['meta']['hits'])
@@ -88,8 +97,16 @@ def parse_search_results(search_url, content, date_dir):
 
       news = []
       results_list = results_json['response']["docs"]
-      results_json = json.loads(content)
-
+      try:
+        results_json = json.loads(content)
+      except:
+        print "return is wrong!"
+        print "the url is", search_url
+        print "-"*20
+        print content
+        print "-"*20
+        sys.exit(-1)
+   
 
       for result in results_list:
         url = result['web_url']
@@ -137,6 +154,7 @@ def parse_search_results(search_url, content, date_dir):
 
 def check_request_count():
   global REQUEST_COUNT
+  print REQUEST_COUNT
   REQUEST_COUNT +=1
   if (REQUEST_COUNT >= LIMIT):
     print "reached daily limit, do it next day"
