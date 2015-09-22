@@ -15,11 +15,6 @@ def set_value(input_value):
 
 
     
-# consumer_key="v4Z0ZQvBFDLcZuGQH2UmVO5hl"
-# consumer_secret="KUj4eXi36md0cUR2dYFbWq4CZX8vJQHwShLBak14xdgU7G0i6z"
-# access_token="612441285-1dUojcAcqw6CCu2nOnjB8TfGBCuToLqu0m2tTfqc"
-# access_token_secret="1QodEQ9CKFCn6VxcD5gsOxrbal9K3zcOSz1AKIoArBzG1"
-
 
 
 parser = argparse.ArgumentParser(description=__doc__)
