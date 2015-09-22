@@ -137,18 +137,29 @@ sub get_response {
 
     my $ua = LWP::UserAgent->new(ssl_opts=>{ verify_hostname => 0, SSL_ca_file => Mozilla::CA::SSL_ca_file()});
 
-    # PROVIDE YOUR KEY HERE
-    my $cc_key = "dj0yJmk9cEp3clF5cld6WE5VJmQ9WVdrOWIxbHRkMnBxTmpRbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1iMg--";
 
-    # PROVIDE YOUR SECRET HERE
-    my $cc_secret = "8fd17d9d22e233c914f5beec766a46db8f4ee077";
+    my $auth = $ARGV[0];
 
-    my $oauth_token="A%3Dr9Ww9p7tgQ_a5GInZBA_qWYc_.8wWiyk57tgTgirPLQUo_0fHZ5N9qChYGj4UCRFC.IbNA9RJ_1lAqUdZLDl3wnwBt_XbYb7dkXB0cl8.GUCXhDsvaDcO14n_4xI5VHp41u76bvo8R0tgTuccbiubPMUlm8Ok.DaJSv0cpuFuosag5oRnmRbDnfJlmbE1cqYR703n.GRXNN0OKFt.TbGRk9JQ5kEnHV.wSKoKK6oY59ROvkfJwm99lNghVnW6vbMi0rKCKdZCrKAp_DxE0BtiiwxYlp02tX3H.Jo4N7XBjsB_pypSFNoFzz_BHW7rznS_P3owFzCziVDm536oRag3m7Z_mZ.RzJBfz2WKqRQlI11RdZpM1LW1uePRftpNu_A9hWXrceWwqMHiEZgeXUkR1DrwrBX5BqQdO3QL2yyny7fvwV8rvNurz6TdxN_qz6QpfIrlXsT6YjR7ifQBkz3q95hRH6yOHi0anEpsdzjkfOsNDsyRAlMclEhkSlHe7S_HYiLZJ3vkegj3o8UNyoc69pl_eSkkL4.JX40weIckDqFUxvA0iuwJQc8ySN_nkp6qDsLlxMDXugAaUfWxKjRh_9Sj7_Bonm7o_3XL_gDm8pI9mbFVhLlwbvvRRlzzw6hj7Hnaf7fk3Vi2zh0vFGNSPM16CiyD6tC5ChajocNCVeWSxZwboCbQJr6vXXLMdgq.C6vfjZKsPyybd0HU39gJcUbaShsMKkaCer0fvlhDQNtU7VzvJzlfr38xNfFRvMd4netQpbcDt46VeLzwarjY7Tjv1hkEFxnKfd6MpzzUA--&";
-    
-	my $oauth_token_secret="8234e7b429d93ebbe5363357999628e20a5830d0";
+    open(OUT,"$auth") or die "cannot open $auth\n$!\n";
+    my $cc_key = <OUT>;
+    chomp $cc_key;
+    #print $cc_key."\n";
+    my $cc_secret = <OUT>;
+    chomp $cc_secret;
+    #print $cc_secret."\n";
+    my $oauth_token=<OUT>;
+    chomp $oauth_token;
+    #print $oauth_token."\n";
+    my $oauth_token_secret=<OUT>;
+    chomp $oauth_token_secret;
+    #print $oauth_token_secret."\n";
+
+    close(OUT);
+
+
     # Source Url
     my $url = "https://yboss.yahooapis.com/ysearch/$buckets";
- 
+
     # Create request
     my $request = Net::OAuth->request("request token")->new(
             consumer_key => $cc_key,
