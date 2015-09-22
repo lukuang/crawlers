@@ -11,7 +11,7 @@ import json
 import argparse
 import time
 from time import gmtime, strftime 
-import os,re
+import os,re,sys
 
 previous = strftime("%Y-%m-%d-%H", gmtime())
 all_data = []
@@ -48,7 +48,18 @@ class StdOutListener(StreamListener):
         print(status)
 
 if __name__ == '__main__':
-    para = json.load(open("auth.json"))
+
+
+    
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("query_string")
+    parser.add_argument("auth_info")
+    args = parser.parse_args()
+    query = re.findall("\w+", args.query_string.lower())
+    print (query)
+
+    para = json.load(open(args.auth_info))
     consumer_key=str(para["consumer_key"])
     consumer_secret=str(para["consumer_secret"])
     access_token=str(para["access_token"])
@@ -58,12 +69,6 @@ if __name__ == '__main__':
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.secure = True
     auth.set_access_token(access_token, access_token_secret)
-
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("query_string")
-    args = parser.parse_args()
-    query = re.findall("\w+", args.query_string.lower())
-    print (query)
     #api = tweepy.API(auth)
 
     # If the authentication was successful, you should
