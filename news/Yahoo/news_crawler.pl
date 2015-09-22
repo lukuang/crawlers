@@ -1,3 +1,8 @@
+#crawl news articles using yahoo news api hourly
+#usage: perl THIS_FILE AUTHENTICATION_FILE
+#
+
+
 use strict;
 use lib 'extra_mods';
 use lib 'extra_mods/5.8';
