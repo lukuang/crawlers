@@ -19,7 +19,9 @@ import traceback
 reload(sys)
 sys.setdefaultencoding('utf-8')
 DEST_DIR = "./data"
-MY_KEY = "3215e5e4465ef98e55c3489a30b5143f:8:72984200"
+
+MY_KEY = open(sys.argv[1]).read()
+print MY_KEY
 
 LIMIT = 10000
 REQUEST_COUNT = 0
