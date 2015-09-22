@@ -87,6 +87,8 @@ def parse_search_results(search_url, content, date_dir):
   if results_cnt > 10:
     pages_cnt = int(math.ceil(results_cnt * 1.0 / 10))
     for i in range(1, pages_cnt):
+      if i >100:
+        break;
       temp_url = search_url + '&page=%s' % str(i)
       content = get_page(temp_url)
       check_request_count()
