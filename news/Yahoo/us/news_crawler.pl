@@ -34,6 +34,12 @@ $args{q} = "((Nepal)or(earthquake))"; # This is the query we are searching for
 $args{format} = $expected_result_format;
 $args{count} = 50; # number of results to be returned
 $args{start} = 0;
+$args{sort} = 'date';
+my %init_args;
+$init_args{q} = $args{q}; # This is the query we are searching for
+$init_args{format} = $expected_result_format;
+$init_args{count} = 50; # number of results to be returned
+$init_args{start} = 0;
 my $start;
 my $count;
 my $total_count;
@@ -43,7 +49,7 @@ my $buckets = "news"; # news,web,images (various BOSS services)
 while(1){
     $args{count} = 50; # number of results to be returned
     $args{start} = 0;
-    $temp = get_response(\%args,$buckets);
+    $temp = get_response(\%init_args,$buckets);
     #print $temp;
     #die;
     ($start,$count, $total_count,$array_ref) = store_result($temp);
@@ -70,6 +76,7 @@ while(1){
     open(OUT,">$out") or die "cannot open $out\n$!\n";
     print OUT $re;
     @all_results = ();
+    close(OUT);
     sleep(3600);
     
 }
