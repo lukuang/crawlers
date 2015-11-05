@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Sign Up</title>
+    <style type="text/css">
+      .label {text-align: right}
+      .error {color: red}
+    
+    </style>
+
+  </head>
+
+  <body>
+    
+    <h2>Crawler</h2>
+    <form name="crawler_form">
+      <table>
+        <tr>
+          <td class="label">
+            url
+          </td>
+          <td>
+            <input type="text" name="url" value="https://www.google.com/search?">
+          </td>
+          <td class="error">
+          </td>
+        </tr>
+
+        
+
+
+        <tr>
+          <td class="label">
+            Document Type
+          </td>
+          <td>
+            <input type="text" name="document_type" value="nws">
+          </td>
+          <td class="error">
+          </td>
+        </tr>
+
+
+        <tr>
+          <td class="label">
+            Start Date
+          </td>
+          <td>
+            <input type="date" name="start_date" value="2015-04-25">
+          </td>
+          <td class="error">
+          </td>
+        </tr>
+
+        <tr>
+          <td class="label">
+            End Date
+          </td>
+          <td>
+            <input type="date" name="end_date" value="2015-04-30">
+          </td>
+          <td class="error">
+          </td>
+        </tr>
+
+
+
+        <tr>
+          <td class="label">
+            Query
+          </td>
+          <td>
+            <input type="text" name="query" value="Nepal Earthquake">
+          </td>
+          <td class="error">
+          </td>
+        </tr>
+      </table>
+
+      
+    </form>
+    <button id="set_query">Set Query</button>
+    <script src="crawler.js"> </script>
+  </body>
+
+</html>
