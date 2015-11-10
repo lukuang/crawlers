@@ -48,7 +48,7 @@ def get_page2(url):
       response = urllib2.urlopen(req)
       return response
     except  urllib2.HTTPError as error:
-      print "Exception in retrieve(). Error code: %d" %error.code
+      print "Exception in retrieve(). Error code: %d" %error.response.status_code
       print '-'*60
       print response
       traceback.print_exc(file=sys.stdout)
@@ -84,9 +84,10 @@ def get_page_use_request(url,cookies = None):
         #cookies = response.header["set-cookie"]
         #url = response.header['location']
         #return get_page_use_request(url,cookies = cookies)
-    
+      else:
+         response.raise_for_status()
     except  requests.exceptions.HTTPError as error:
-      print "Exception in retrieve(). Error code: %d" %error.code
+      print "Exception in retrieve(). Error code: %d" %error.response.status_code
       print url
       print '-'*60
       print response
@@ -112,7 +113,7 @@ def get_error_info(data_dir):
     output = p.communicate()[0]
     lines = output.split("\n")
     for line in lines:
-        m = re.search("^(data.+)/error$",line)
+        m = re.search("^(.+)/error$",line)
         if m is not None:
             error_info.append(m.group(1))
         else:
